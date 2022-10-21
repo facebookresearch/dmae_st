@@ -50,3 +50,7 @@ Packages are all provided in `requirements.txt`.
 
 ### Notes
 1. `torchvision` needs to be build from source with `ffmpeg` backend to properly decode video data for `Masked autoencoder` data loading. Follow instructions [here](https://github.com/pytorch/vision) in the section regarding `Video Backend`. 
+
+### License
+
+This project is under the CC-BY-NC 4.0 license. See [LICENSE](LICENSE.md) for details.

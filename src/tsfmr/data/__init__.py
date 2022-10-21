@@ -1,0 +1,1 @@
+from data.nturgbd_skeletons import NTURGBDSkeletons

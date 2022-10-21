@@ -1,0 +1,5 @@
+experiments/**
+data/**
+.vscode/**
+**/__pycache__/**
+**/ignore_files/**

@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 source /data/home/alexnw/load_modules.sh
 
 # python src/mae_submitit_linprobe.py --job_dir="experiments/mae-st/MAE_ST-200epochs-k400v2-288px/linprobe-frac100-repeat2" \

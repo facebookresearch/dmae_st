@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 """
 Pose transformer didn't outperform the learnable representation.
 What if we could just combine the two methods and use it as a jumpstart but also give it the learnable option?

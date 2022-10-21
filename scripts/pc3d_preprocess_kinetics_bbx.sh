@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 # Set modules for EFA reduce
 source /data/home/alexnw/load_modules.sh
 

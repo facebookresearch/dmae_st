@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 """
 Based on 06-13:0 and 06-14:0, models are overfitting considerably. Though they still do not get great results
 in any regard (SotA is around 94%), they overfit to ~70% while evaluating at 50-60%. 

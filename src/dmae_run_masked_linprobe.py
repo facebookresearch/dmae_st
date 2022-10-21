@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 from pathlib import Path
 
 from dmae.main_masked_linprobe import get_args_parser, main

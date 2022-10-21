@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 # Set modules for EFA reduce
 source /data/home/alexnw/load_modules.sh
 # python src/mae_submitit_finetune.py --job_dir="experiments/mae-st/8x8A100-MAE_ST-bs3-fp32-EFA/finetune" --ngpus=8 --nodes=8 --exclude=260,217,96,39,47,76,72 \

@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 import mae.util.logging as logging
 import torch
 import torch.nn as nn

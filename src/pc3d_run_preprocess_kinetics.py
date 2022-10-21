@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 from pathlib import Path
 
 from pc3d.main_preprocess_kinetics import get_args_parser, main

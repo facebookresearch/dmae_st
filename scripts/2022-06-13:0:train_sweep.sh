@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 """
 Initial sweep of training a batch of experiments using pose and regular transformers.
 Memory is a significant issue, had to use batch_size=16 in order to make it even fit on an A100...

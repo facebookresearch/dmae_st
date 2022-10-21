@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 """ Transformer components in PyTorch
 
 A PyTorch implement of components for Transformers.

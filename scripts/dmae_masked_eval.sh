@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 source /data/home/alexnw/load_modules.sh
 
 python src/dmae_submitit_masked_finetune.py --job_dir="experiments/dmae-st/DMAE_ST-200epochs-TempCos150_050/masked_eval" \

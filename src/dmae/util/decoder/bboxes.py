@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 from typing import Iterable, Union, Tuple
 import numpy as np
 import torch

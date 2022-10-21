@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
 source /data/home/alexnw/miniconda/etc/profile.d/conda.sh
 
 # Set modules for EFA reduce

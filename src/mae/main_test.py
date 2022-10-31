@@ -97,6 +97,8 @@ def get_args_parser():
     parser.add_argument("--sampling_rate", default=4, type=int)
     parser.add_argument("--distributed", action="store_true")
     parser.add_argument("--repeat_aug", default=1, type=int)
+    parser.add_argument("--test_num_spatial_crops", default=3, type=int)
+    parser.add_argument("--test_num_ensemble_views", default=10, type=int)
     parser.add_argument("--encoder_attn", default="AttentionWithCls", type=str)
 
     # Dataset parameters
@@ -139,12 +141,14 @@ def main(args):
             repeat_aug=args.repeat_aug,
             rand_aug=False,
             num_retries=args.num_retries,
-            test_num_ensemble_views=10,
+            test_num_ensemble_views=args.test_num_ensemble_views,
+            test_num_spatial_crops=args.test_num_spatial_crops,
             testset=testset
         )
+        total_test_ex = args.test_num_ensemble_views * args.test_num_spatial_crops
         test_meter = TestMeter(
-            num_videos=dataset_test.num_videos // (3 * 10),
-            num_clips=3 * 10,
+            num_videos=dataset_test.num_videos // total_test_ex,
+            num_clips=total_test_ex,
             num_cls=args.nb_classes,
             overall_iters=len(dataset_test),
             multi_label=False,

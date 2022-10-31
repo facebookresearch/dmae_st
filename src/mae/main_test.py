@@ -18,6 +18,7 @@ import timm
 import torch
 import torch.backends.cudnn as cudnn
 from iopath.common.file_io import g_pathmgr as pathmgr
+from torch import distributed as dist
 
 from mae.util.kinetics import Kinetics
 from mae.util.logging import master_print as print
@@ -219,6 +220,11 @@ def main(args):
             model_without_ddp = model.module
 
         log_stats = test(data_loader_test, model, device, test_meter, fp32=args.fp32)
+        
+    if dist.is_initialized():
+        assert args.distributed
+        dist.destroy_process_group()
+        
     return [log_stats]
 
 

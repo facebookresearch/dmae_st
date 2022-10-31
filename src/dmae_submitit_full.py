@@ -88,8 +88,10 @@ class Trainer(object):
         checkpoint_dir.mkdir(exist_ok=True, parents=True)
         args.checkpoint_dir = Path(os.path.join(str(args.output_dir), "checkpoints"))
         if args.rank == 0:
+            dirname = os.path.dirname(args.checkpoint_dir)
+            if not os.path.exists(dirname):
+                os.makedirs(dirname, exist_ok=True)
             if not os.path.exists(args.checkpoint_dir):
-                os.makedirs(os.path.dirname(args.checkpoint_dir), exist_ok=True)
             args.checkpoint_dir.symlink_to(checkpoint_dir)
         return args
 

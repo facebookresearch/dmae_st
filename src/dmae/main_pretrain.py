@@ -23,21 +23,23 @@ import torchvision
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from iopath.common.file_io import g_pathmgr as pathmgr
+from mae.util import video_vit
+from mae.util.kinetics import Kinetics
 from tensorboard.compat.tensorflow_stub.io.gfile import register_filesystem
+from torch import distributed as dist
 # from tensorboard.fb.manifoldio import ManifoldFileSystem
 from torch.utils.tensorboard import SummaryWriter
+
 from dmae.util.kinetics_bbox import KineticsBbox
 from dmae.util.kinetics_v2 import KineticsV2
 
-from mae.util import video_vit
-from mae.util.kinetics import Kinetics
-
 assert timm.__version__ == "0.3.2"  # version check
-import dmae.models_dmae as models_dmae
 import mae.util.logging as logging
 import mae.util.misc as misc
-from dmae.engine_pretrain import train_one_epoch
 from mae.util.misc import NativeScalerWithGradNormCount as NativeScaler
+
+import dmae.models_dmae as models_dmae
+from dmae.engine_pretrain import train_one_epoch
 
 
 def get_args_parser():
@@ -336,6 +338,10 @@ def main(args):
                 "a",
             ) as f:
                 f.write(json.dumps(log_stats) + "\n")
+
+    if dist.is_initialized():
+        assert args.distributed
+        dist.destroy_process_group()
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))

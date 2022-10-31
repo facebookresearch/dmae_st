@@ -26,6 +26,7 @@ from torch.utils import data as torchdata
 import torchvision
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
+import torch.distributed as dist
 from iopath.common.file_io import g_pathmgr as pathmgr
 from tensorboard.compat.tensorflow_stub.io.gfile import register_filesystem
 # from tensorboard.fb.manifoldio import ManifoldFileSystem
@@ -480,6 +481,10 @@ def main(args):
                 "a",
             ) as f:
                 f.write(json.dumps(log_stats) + "\n")
+        
+    if dist.is_initialized():
+        assert args.distributed
+        dist.destroy_process_group()
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))

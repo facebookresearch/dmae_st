@@ -92,7 +92,7 @@ class Trainer(object):
             if not os.path.exists(dirname):
                 os.makedirs(dirname, exist_ok=True)
             if not os.path.exists(args.checkpoint_dir):
-            args.checkpoint_dir.symlink_to(checkpoint_dir)
+                args.checkpoint_dir.symlink_to(checkpoint_dir)
         return args
 
 def aws_get_shared_folder() -> Path:

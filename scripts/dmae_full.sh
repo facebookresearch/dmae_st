@@ -4,7 +4,7 @@ for TEMP in -1e10 -2e0 -1e0 -0.5e0 0 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
     python src/dmae_submitit_full.py --job_dir="experiments/dmae-st/DMAE_ST-full-sweep/DMAE_ST-full-TEMP$TEMP" \
         --nodes=8 --exclude="134,135,260,50,219" \
         --partition=hipri --account=all \
-        --PRETRAIN.epochs=1 --PRETRAIN.warmup_epochs=20 \
+        --PRETRAIN.epochs=200 --PRETRAIN.warmup_epochs=20 \
         --PRETRAIN.checkpoint_period=20 \
         --PRETRAIN.batch_size=3 --PRETRAIN.repeat_aug=4 --PRETRAIN.accum_iter=1 \
         --PRETRAIN.input_size=224  --PRETRAIN.num_frames=16 --PRETRAIN.mask_ratio=0.90 --PRETRAIN.mask_schedule=const --PRETRAIN.mask_type=directed --PRETRAIN.norm_pix_loss \

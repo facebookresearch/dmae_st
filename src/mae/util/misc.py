@@ -212,11 +212,14 @@ class MetricLogger(object):
             )
         )
 
-
+SETUP_FOR_DISTRUTED = False
 def setup_for_distributed(is_master):
     """
     This function disables printing when not in master process
     """
+    if SETUP_FOR_DISTRUTED:
+        return 
+    
     builtin_print = builtins.print
 
     def print(*args, **kwargs):
@@ -228,6 +231,8 @@ def setup_for_distributed(is_master):
             builtin_print(*args, **kwargs)
 
     builtins.print = print
+    global SETUP_FOR_DISTRUTED
+    SETUP_FOR_DISTRUTED = True
 
 
 def is_dist_avail_and_initialized():

@@ -192,6 +192,8 @@ def get_args_parser():
     # Finetuning dataset subsampling
     parser.add_argument("--finetune_fraction", default=1.0, type=float,
                         help="[0, 1.] for the amount of the full training set to fine tune on.")
+    parser.add_argument("--finetune_data_seed", default=0, type=int,
+                        help="Seed value to control ")
     parser.add_argument("--checkpoint_dir", default=None, type=str,
                         help="location for checkpoint paths")
     return parser
@@ -214,7 +216,7 @@ def main(args):
     torchvision.set_video_backend("video_reader")
 
     cudnn.benchmark = True
-
+    
     dataset_train = Kinetics(
         mode="finetune",
         path_to_data_dir="/datasets01/kinetics/092121/400",
@@ -236,7 +238,10 @@ def main(args):
     dataset_train, _ = torchdata.random_split(dataset_train,
                                               [dataset_amt,
                                                len(dataset_train) - dataset_amt],
-                                              generator=torch.Generator().manual_seed(seed))
+                                              generator=torch.Generator().manual_seed(args.finetune_data_seed))
+                                              # we are not using the same seed for data splitting as random state to allow
+                                              # re-sampling new datasets.
+                                              # Also keeps it constant between different processed in multigpu work.
     
     dataset_val = Kinetics(
         mode="val",

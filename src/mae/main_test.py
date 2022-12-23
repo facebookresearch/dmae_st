@@ -220,6 +220,12 @@ def main(args):
             model_without_ddp = model.module
 
         log_stats = test(data_loader_test, model, device, test_meter, fp32=args.fp32)
+        if args.output_dir and misc.is_main_process():
+            with pathmgr.open(
+                f"{args.output_dir}/log.txt",
+                "a",
+            ) as f:
+                f.write(json.dumps(log_stats) + "\n")
         
     if dist.is_initialized():
         assert args.distributed

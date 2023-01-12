@@ -105,7 +105,7 @@ def main():
     
     name = args.job_dir.split("/")[-1]
     
-    if args.partition == "lowpri" and args.time == 0:
+    if args.partition == "learnai4p" and args.time == 0:
         print("No timeout specified for lowpri, setting to 1440.")
         args.time = 1440
     

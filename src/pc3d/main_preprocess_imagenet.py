@@ -67,7 +67,7 @@ def get_args_parser():
     
     return parser
 
-class ImageNetFP(tvd.ImageNet):
+class ImageNetFP(tvd.ImageFolder):
     def __getitem__(self, idx):
         file = self.imgs[idx][0].split("/")[-1]
         sample, target = super(ImageNetFP, self).__getitem__(idx)
@@ -89,7 +89,6 @@ def main(args):
     np.random.seed(seed)
     
     dataset = ImageNetFP(args.data_dir,
-                         split="train",
                          transform=ToTensor())
     
     if args.distributed:
@@ -154,8 +153,8 @@ def main(args):
             dir = os.path.dirname(out_path)
             if not os.path.exists(dir):
                 os.makedirs(dir, exist_ok=True)
+            assert not os.path.exists(out_path), f"pkl for class {curr_class} already exists"
             with open(out_path, 'wb') as f:
-                assert not os.path.exists(f), f"pkl for class {curr_class} already exists"
                 pickle.dump(bounding_boxes, f)
             # ====
             

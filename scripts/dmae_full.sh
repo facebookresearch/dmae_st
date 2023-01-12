@@ -1,9 +1,15 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # All rights reserved.
-for TEMP in -1e10 -2e0 -1e0 -0.5e0 0 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
-    python src/dmae_submitit_full.py --job_dir="experiments/dmae-st/DMAE_ST-full-sweep/DMAE_ST-full-TEMP$TEMP" \
-        --nodes=8 --exclude="134,135,260,50,219" \
-        --partition=hipri --account=all \
+
+# removed from submitit args:
+# --exclude="134,135,260,50,219" \
+
+# for TEMP in -1e10 -2e0 -1e0 -0.5e0 0 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
+# for TEMP in 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
+for TEMP in 1e0 2e0; do
+    python src/dmae_submitit_full.py --job_dir="experiments/dmae-st/DMAE_ST-full-sweep-positives/DMAE_ST-full-TEMP$TEMP" \
+        --nodes=8 \
+        --partition=learnai4p --account=all \
         --PRETRAIN.epochs=200 --PRETRAIN.warmup_epochs=20 \
         --PRETRAIN.checkpoint_period=20 \
         --PRETRAIN.batch_size=3 --PRETRAIN.repeat_aug=4 --PRETRAIN.accum_iter=1 \

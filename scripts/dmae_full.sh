@@ -6,7 +6,7 @@
 
 # for TEMP in -1e10 -2e0 -1e0 -0.5e0 0 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
 # for TEMP in 0.5e0 1e0 1.5e0 2e0 5e0 1e10; do
-for TEMP in 1e0 2e0; do
+for TEMP in -1.5e0 -5e0; do
     python src/dmae_submitit_full.py --job_dir="experiments/dmae-st/DMAE_ST-full-sweep-positives/DMAE_ST-full-TEMP$TEMP" \
         --nodes=8 \
         --partition=learnai4p --account=all \

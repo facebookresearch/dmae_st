@@ -346,6 +346,12 @@ def main(args):
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     print("Training time {}".format(total_time_str))
+    
+    ckpt_dir = os.path.dirname(checkpoint_path)
+    for ckpt_path in [os.path.join(ckpt_dir, ckpt_file) for ckpt_file in os.listdir(ckpt_dir)]:
+        if ckpt_path is not checkpoint_path:
+            os.remove(ckpt_path)
+            
     return [checkpoint_path]
 
 

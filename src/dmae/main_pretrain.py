@@ -114,7 +114,7 @@ def get_args_parser():
     parser.add_argument("--t_patch_size", default=2, type=int,
                         help="""Temporal kernel size when projecting into patches""")
     parser.add_argument("--num_frames", default=16, type=int)
-    parser.add_argument("--checkpoint_period", default=5, type=int)
+    parser.add_argument("--checkpoint_period", default=50, type=int)
     parser.add_argument("--sampling_rate", default=4, type=int)
     # parser.add_argument("--distributed", action="store_true")
     parser.add_argument("--repeat_aug", default=4, type=int)

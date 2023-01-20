@@ -438,15 +438,6 @@ def main(args):
             args=args,
             fp32=args.fp32,
         )
-        if args.output_dir:
-            checkpoint_path = misc.save_model(
-                args=args,
-                model=model,
-                model_without_ddp=model_without_ddp,
-                optimizer=optimizer,
-                loss_scaler=loss_scaler,
-                epoch=epoch,
-            )
         
         if epoch % args.eval_period == 0 or epoch + 1 == args.epochs:
             
@@ -455,11 +446,21 @@ def main(args):
                 f"Accuracy of the network on the {len(dataset_val)} test images: {test_stats['acc1']:.1f}%"
             )
             if test_stats["acc1"] >= max_accuracy:
+                if args.output_dir:
+                    checkpoint_path = misc.save_model(
+                        args=args,
+                        model=model,
+                        model_without_ddp=model_without_ddp,
+                        optimizer=optimizer,
+                        loss_scaler=loss_scaler,
+                        epoch=epoch,
+                    )
                 best_epoch = epoch
                 best_path = os.path.join(args.output_dir, "best_checkpoint.pth")
                 print(f"New max found, copying checkpoint {checkpoint_path} to {best_path}")
                 shutil.copy2(checkpoint_path,
                              best_path)
+                os.remove(checkpoint_path)
                 
             max_accuracy = max(max_accuracy, test_stats["acc1"])
             print(f"Max accuracy: {max_accuracy:.2f}% at bestepoch: {best_epoch:05d}")

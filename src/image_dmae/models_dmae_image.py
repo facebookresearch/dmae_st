@@ -29,44 +29,13 @@ class DirectedImageMaskedAutoencoderViT(ImageMaskedAutoencoderViT):
                  decoder_embed_dim=512, decoder_depth=8, decoder_num_heads=16,
                  mlp_ratio=4., norm_layer=nn.LayerNorm, norm_pix_loss=False,
                  flip_mask=False):
-        super(ImageMaskedAutoencoderViT, self).__init__()
+        super(DirectedImageMaskedAutoencoderViT, self).__init__(img_size, patch_size, in_chans, embed_dim,
+                                                                depth, num_heads, decoder_embed_dim,
+                                                                decoder_depth, decoder_num_heads,
+                                                                mlp_ratio, norm_layer, norm_pix_loss)
         
         self.flip_mask = flip_mask
         self.patch_binary_map = PatchBinaryMap(img_size, patch_size)
-
-        # --------------------------------------------------------------------------
-        # MAE encoder specifics
-        self.patch_embed = PatchEmbed(img_size, patch_size, in_chans, embed_dim)
-        num_patches = self.patch_embed.num_patches
-
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim), requires_grad=False)  # fixed sin-cos embedding
-
-        self.blocks = nn.ModuleList([
-            Block(embed_dim, num_heads, mlp_ratio, qkv_bias=True, qk_scale=None, norm_layer=norm_layer)
-            for i in range(depth)])
-        self.norm = norm_layer(embed_dim)
-        # --------------------------------------------------------------------------
-
-        # --------------------------------------------------------------------------
-        # MAE decoder specifics
-        self.decoder_embed = nn.Linear(embed_dim, decoder_embed_dim, bias=True)
-
-        self.mask_token = nn.Parameter(torch.zeros(1, 1, decoder_embed_dim))
-
-        self.decoder_pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, decoder_embed_dim), requires_grad=False)  # fixed sin-cos embedding
-
-        self.decoder_blocks = nn.ModuleList([
-            Block(decoder_embed_dim, decoder_num_heads, mlp_ratio, qkv_bias=True, qk_scale=None, norm_layer=norm_layer)
-            for i in range(decoder_depth)])
-
-        self.decoder_norm = norm_layer(decoder_embed_dim)
-        self.decoder_pred = nn.Linear(decoder_embed_dim, patch_size**2 * in_chans, bias=True) # decoder to patch
-        # --------------------------------------------------------------------------
-
-        self.norm_pix_loss = norm_pix_loss
-
-        self.initialize_weights()
 
     def weighted_masking(self, x, weight, mask_ratio):
         N, L, D = x.shape  # batch, length, dim

@@ -5,7 +5,7 @@ IMAGENET_DIR=""
 IMAGENET_BBOX_DIR=""
 
 # Both versions of MAE_ST at 10%
-python src/image_mae_submitit_pretrain.py --job_dir="experiments/image_dmae/train" \
+python src/image_dmae_submitit_pretrain.py --job_dir="experiments/image_dmae/train" \
     --nodes=8 --exclude="" \
     --partition=learnai4p --acount=all \
     --distributed \

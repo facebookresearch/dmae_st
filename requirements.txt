@@ -58,6 +58,6 @@ torchvision==0.11.0a0+05eae32
 tqdm==4.64.0
 typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1650370875435/work
 urllib3==1.26.9
-Werkzeug==2.1.2
+Werkzeug==3.1.5
 yacs==0.1.8
 zipp==3.8.0

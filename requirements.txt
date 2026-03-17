@@ -30,7 +30,7 @@ Pillow==9.1.1
 portalocker==2.4.0
 protobuf==3.19.4
 psutil==5.9.1
-pyasn1==0.4.8
+pyasn1==0.6.3
 pyasn1-modules==0.2.8
 pycurl==7.45.1
 pyparsing==3.0.9
